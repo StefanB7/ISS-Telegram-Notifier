@@ -54,4 +54,4 @@ Run the ISS Notification bot by:
 (venv) $ python3 issBot.py
 ```
 
-To let the bot run in the background, press `Ctrl+Z`, type bg in the command prompt `Enter` and then disown and `Enter`. You can now close your SSH session into your machine.
+To let the bot run in the background, press `Ctrl+Z`, type bg in the command prompt `Enter` and then disown and `Enter`. You can now close your SSH session.
