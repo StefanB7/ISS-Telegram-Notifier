@@ -12,7 +12,7 @@ _Try it out:_ Send `/start` to [the ISS Notifier bot](https://t.me/iss_notifier7
 
 By default, when subscribed, users are notified an hour before any ISS sightings and when the ISS can be seen.
 
-All sighting oppertunities are scraped from [NASA's spot the station](spotthestation.nasa.gov). Thanks NASA!
+All sighting oppertunities are scraped from [NASA's spot the station](https://spotthestation.nasa.gov). Thanks NASA!
 
 ## Installation
 
