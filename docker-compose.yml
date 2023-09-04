@@ -8,4 +8,4 @@ services:
     volumes:
       - ./persistent_data:/app/persistent_data # Map the host directory to the container
     environment:
-      - TELEGRAM_API_KEY=<your telegram api key>
+      - TELEGRAM_API_TOKEN=<your telegram api key>
