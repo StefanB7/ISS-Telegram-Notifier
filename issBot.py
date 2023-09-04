@@ -4,6 +4,8 @@ from telegram import Update
 from telegram.ext import filters, CallbackContext, MessageHandler, ApplicationBuilder, CommandHandler, ContextTypes, Application, PicklePersistence
 import math
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 
 from upcomingSightings import UpcomingSightings
 
@@ -11,6 +13,11 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.ERROR
 )
+
+# Load env file:
+load_dotenv()
+
+TELEGRAM_API_KEY = os.getenv("TELEGRAM_API_KEY")
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -109,7 +116,7 @@ async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
 upcomingSightings = UpcomingSightings()
 
 iss_bot_persistance = PicklePersistence(
-    filepath='iss_bot_persisted', update_interval=10800)
+    filepath='/app/persistent_data/iss_bot_persisted', update_interval=10800)
 
 
 async def notifyTask(context: CallbackContext):
@@ -146,7 +153,7 @@ async def sendOverheadNow(sighting, context: CallbackContext, chatId):
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(
-        '{API TOKEN}').persistence(persistence=iss_bot_persistance).build()
+        TELEGRAM_API_KEY).persistence(persistence=iss_bot_persistance).build()
 
     start_handler = CommandHandler(['help', 'start'], start)
     application.add_handler(start_handler)
@@ -164,4 +171,4 @@ if __name__ == '__main__':
     notifyTaskJob = application.job_queue.run_repeating(
         notifyTask, interval=60, first=10)
 
-    application.run_polling(poll_interval=2.0)
+    application.run_polling(poll_interval=4.0)

@@ -1,0 +1,9 @@
+version: "3"
+services:
+  issNotifierBot:
+    container_name: issNotifierBot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./persistent_data:/app/persistent_data # Map the host directory to the container
