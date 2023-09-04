@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY *.py /app/
 
 # Copy persistence files
-COPY iss_bot_persisted /app/iss_bot_persisted
+COPY iss_bot_persisted /app/persistent_data/iss_bot_persisted
 
 # Specify the command to run your application
 CMD [ "python", "issBot.py" ]
