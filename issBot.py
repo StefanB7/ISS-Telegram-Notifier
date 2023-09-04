@@ -14,11 +14,6 @@ logging.basicConfig(
     level=logging.ERROR
 )
 
-# Load env file:
-load_dotenv()
-
-TELEGRAM_API_KEY = os.getenv("TELEGRAM_API_KEY")
-
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     response = "Hi. I'm the ISS sightings bot.\nI'll update you about possible ISS sightings in your area if you subscribe.\nTo subscribe, reply with /subscribe.\nTo unsubscribe, reply with /unsubscribe\nTo view a list of upcoming sightings, reply with /sightings"
@@ -116,7 +111,7 @@ async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
 upcomingSightings = UpcomingSightings()
 
 iss_bot_persistance = PicklePersistence(
-    filepath='/app/persistent_data/iss_bot_persisted', update_interval=10800)
+    filepath='./persistent_data/iss_bot_persisted', update_interval=10800)
 
 
 async def notifyTask(context: CallbackContext):
@@ -152,6 +147,10 @@ async def sendOverheadNow(sighting, context: CallbackContext, chatId):
     await context.bot.send_message(chatId, notificationText)
 
 if __name__ == '__main__':
+    # Load env file:
+    load_dotenv()
+    TELEGRAM_API_KEY = os.getenv("TELEGRAM_API_TOKEN")
+
     application = ApplicationBuilder().token(
         TELEGRAM_API_KEY).persistence(persistence=iss_bot_persistance).build()
 

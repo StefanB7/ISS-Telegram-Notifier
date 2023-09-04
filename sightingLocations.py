@@ -22,10 +22,15 @@ def trimUnwantedChars(input):
 
 
 def getAllSightingLocations():
-    url = "https://spotthestation.nasa.gov/js/marker_list.js"
+    url = "https://spotthestation.nasa.gov/home.cfm"
 
     x = requests.get(url)
     response_text = x.text
+
+    address_points_start_index = response_text.find('addressPoints')
+    list_of_markers_text = response_text[address_points_start_index:response_text.find(
+        '</script>', address_points_start_index)]
+    response_text = list_of_markers_text
 
     marker_locations = []
 
@@ -58,5 +63,5 @@ def getAllSightingLocations():
         marker_locations.append(SigthingLocation(
             name, longitude, lattitude, province, country, city))
         locationIndexStart = response_text.find("[", locationIndexStart+1)
-    
+
     return marker_locations

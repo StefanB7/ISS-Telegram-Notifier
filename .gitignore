@@ -5,6 +5,7 @@ __pycache__/
 
 .env
 iss_bot_persisted
+persistent_data/
 
 # C extensions
 *.so
